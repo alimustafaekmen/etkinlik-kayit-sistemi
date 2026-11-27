@@ -5,5 +5,5 @@
 Closes #
 
 ## Kontrol
-- [ ] `make test` ve `make lint` geçti
+- [ ] Testler (pytest) ve lint (ruff) geçti
 - [ ] CI yeşil

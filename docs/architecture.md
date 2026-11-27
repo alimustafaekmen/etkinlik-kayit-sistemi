@@ -6,9 +6,9 @@ Uygulama tek bir Flask uygulaması. Proje küçük olduğu için mikroservis yer
 
 - `routes/`: HTML sayfaları (`web.py`), JSON API (`api.py`), `/health` ve `/metrics` (`health.py`)
 - `services/`: iş kuralları (etkinlik, kayıt, doğrulama)
-- `db.py`: veritabanı bağlantısı. Yerelde SQLite, canlıda PostgreSQL kullanılıyor.
+- `db.py`: veritabanı bağlantısı. Yerelde SQLite, canlıda PostgreSQL (Neon) kullanılır.
 
-İş kuralları route'lardan ayrı olduğu için testlerini yazmak kolay oldu.
+İş kuralları route'lardan ayrı olduğu için tek başına test edilebilir.
 
 ```mermaid
 flowchart LR
@@ -71,5 +71,5 @@ için sayma ve ekleme işlemini tek transaction içinde, kilit alarak yapıyorum
 - PostgreSQL'de etkinlik satırı `SELECT ... FOR UPDATE` ile kilitleniyor.
 
 Kilit alındıktan sonra etkinliğin var olup olmadığı, tarihinin geçip geçmediği, e-postanın daha önce kaydolup
-kaydolmadığı ve kontenjan kontrol ediliyor. Yer varsa kayıt ekleniyor, yoksa `409 capacity_full` dönüyor. Bunu
-aynı anda 12 istek gönderen bir testle denedim, kontenjan aşılmadı.
+kaydolmadığı ve kontenjan kontrol ediliyor. Yer varsa kayıt ekleniyor, yoksa `409 capacity_full` dönüyor. Bu durum
+aynı anda çok sayıda istek gönderen bir testle kontrol edilir.
