@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# Haftalık Kanban teslim dosyalarını submission/dist/ altına hazırlar (dönem haftaları 10..14):
-#   Kanban_Week_NN.png                 (o haftanın pano görüntüsü)
-#   Kanban_History_Week_10-NN.zip      (10. haftadan NN. haftaya kadar tüm görüntüler)
-# Kullanım: bash scripts/kanban_snapshot.sh NN     (veya: make kanban-snapshot WEEK=NN)
+# Haftalık Kanban teslim dosyalarını submission/dist/ altına kopyalar:
+# Kanban_Week_NN.png ve 10. haftadan itibaren tüm görüntüler için Kanban_History_Week_10-NN.zip
+# Kullanım: bash scripts/kanban_snapshot.sh NN  (veya make kanban-snapshot WEEK=NN)
 set -euo pipefail
 
 WEEK="${1:-}"
@@ -16,7 +15,7 @@ SHOTS="$ROOT/kanban/screenshots"
 DIST="$ROOT/submission/dist"
 mkdir -p "$DIST"
 
-# Haftanın görüntüsünü bulur (.png, yoksa .jpg)
+# Haftanın görüntüsü (.png ya da .jpg)
 shot() {
   for f in "$SHOTS/Kanban_Week_$1.png" "$SHOTS/Kanban_Week_$1.jpg"; do
     if [ -f "$f" ]; then echo "$f"; return; fi

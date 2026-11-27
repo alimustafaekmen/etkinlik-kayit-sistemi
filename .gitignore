@@ -5,13 +5,13 @@ __pycache__/
 venv/
 *.egg-info/
 
-# Test / kalite araçları
+# Test araçları
 .pytest_cache/
 .ruff_cache/
 .coverage
 htmlcov/
 
-# Yerel veritabanı ve ortam dosyaları
+# Yerel veritabanı ve .env
 data/
 *.db
 *.db-wal
@@ -20,14 +20,14 @@ data/
 .env.*
 !.env.example
 
-# İşletim sistemi / editör
+# Sistem ve editör dosyaları
 .DS_Store
 .idea/
 .vscode/
 
-# Kişisel klasör: ders yönergeleri ve kişisel tamamlama planı (depoya eklenmez)
+# Kişisel notlar
 private/
 
-# Teslim paketleri (OnlineBeykoz'a yüklenir, depoya eklenmez)
+# Teslim paketleri (OnlineBeykoz'a yükleniyor)
 submission/dist/
 *.zip
