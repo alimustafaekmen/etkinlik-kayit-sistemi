@@ -27,4 +27,4 @@ Her pazar:
 
 1. Kartların durumunu ve kanıt linklerini güncelliyorum.
 2. Panonun ekran görüntüsünü `kanban/screenshots/Kanban_Week_NN.png` olarak kaydediyorum.
-3. `make kanban-snapshot WEEK=NN` ile teslim dosyalarını hazırlayıp OnlineBeykoz'a yüklüyorum.
+3. `bash scripts/kanban_snapshot.sh NN` ile teslim dosyalarını hazırlayıp OnlineBeykoz'a yüklüyorum.
