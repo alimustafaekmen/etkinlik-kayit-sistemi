@@ -9,9 +9,7 @@ venv/
 .pytest_cache/
 .ruff_cache/
 .coverage
-coverage.xml
 htmlcov/
-test-results.xml
 
 # Yerel veritabanı ve ortam dosyaları
 data/
@@ -27,14 +25,9 @@ data/
 .idea/
 .vscode/
 
-# Teslim paketleri (GitHub'a yüklenmez, OnlineBeykoz'a yüklenir)
-teslim/*.zip
-teslim/*.pdf
+# Kişisel klasör: ders yönergeleri ve kişisel tamamlama planı (depoya eklenmez)
+private/
 
-# Kişisel rehber ve ders dokümanları (depoya eklenmez)
-BASLA_BURADAN.md
-5_HAFTALIK_TAMAMLAMA_PLANI.md
-YZM6443_*.pdf
-*.rtf
-Proje.png
-Cloud DevOps Learning Pipeline.png
+# Teslim paketleri (OnlineBeykoz'a yüklenir, depoya eklenmez)
+submission/dist/
+*.zip
