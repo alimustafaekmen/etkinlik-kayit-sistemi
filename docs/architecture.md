@@ -48,6 +48,20 @@ yerelde, CI'da ve Render'da çalışıyor.
 - Kayıtlı sayısını ayrı bir sütunda tutmadım, her seferinde `COUNT` ile hesaplanıyor.
 - Render'ın ücretsiz planında disk kalıcı olmadığı için canlı veriler Neon PostgreSQL'de duruyor.
 
+## API
+
+Web sayfalarının yanında aynı işlemler JSON API olarak da var.
+
+| Metot | Yol | Ne yapar | Dönüş kodları |
+|---|---|---|---|
+| GET | `/api/events?q=` | Etkinlik listesi ve arama | 200 |
+| POST | `/api/events` | Etkinlik oluşturur | 201, 400 |
+| GET | `/api/events/<id>` | Etkinlik detayı | 200, 404 |
+| POST | `/api/events/<id>/registrations` | Kayıt olur | 201, 400, 404, 409 |
+| POST | `/api/events/<id>/registrations/cancel` | Kaydı iptal eder | 200, 400, 404 |
+| GET | `/health` | Uygulama ve veritabanı durumu | 200, 503 |
+| GET | `/metrics` | İstek sayıları | 200 |
+
 ## Kontenjan aşımı nasıl önleniyor
 
 Son bir yer kalmışken iki kişi aynı anda kayıt olmaya çalışırsa ikisi de "yer var" görüp kaydolabilir. Bunu önlemek
