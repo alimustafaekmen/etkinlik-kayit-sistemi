@@ -1,0 +1,25 @@
+[project]
+name = "etkinlik-kayit-sistemi"
+version = "1.0.0"
+description = "Etkinlik oluşturma, katılımcı kaydı ve kontenjan kontrolü (Bulut ve DevOps dönem projesi)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["etkinlik"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests"]
+extend-exclude = ["data", "private"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP"]
