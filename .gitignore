@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Test / kalite araçları
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+test-results.xml
+
+# Yerel veritabanı ve ortam dosyaları
+data/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.*
+!.env.example
+
+# İşletim sistemi / editör
+.DS_Store
+.idea/
+.vscode/
+
+# Teslim paketleri (GitHub'a yüklenmez, OnlineBeykoz'a yüklenir)
+teslim/*.zip
+teslim/*.pdf
+
+# Kişisel rehber ve ders dokümanları (depoya eklenmez)
+BASLA_BURADAN.md
+5_HAFTALIK_TAMAMLAMA_PLANI.md
+YZM6443_*.pdf
+*.rtf
+Proje.png
+Cloud DevOps Learning Pipeline.png
