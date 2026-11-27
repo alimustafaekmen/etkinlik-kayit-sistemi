@@ -1,7 +1,7 @@
 ﻿id,title,workflow,labels,week,week_dates,priority,estimate_hours,status,branch,description,acceptance_criteria,evidence
 PM-01,Kanban panosunun kurulması,Agile & Sunum,Agile & Sunum;Agile,10,23–29 Kasım 2026,P1,1,Done,-,"GitHub Projects'te Todo, In Progress, Issues / Blocked ve Done sütunlu public bir pano kurulur. 32 görev issue olarak panoya eklenir.","Panoda dört sütun var
 Her kartta açıklama, kabul kriterleri ve kanıt dolu
-Hafta 10 pano görüntüsü alındı",Pano: https://github.com/users/alimustafaekmen/projects/1
+Hafta 10 pano görüntüsü alındı",Pano: https://github.com/users/alimustafaekmen/projects/1 (Hafta 10 görüntüsü: kanban/screenshots/Kanban_Week_10.png)
 GIT-01,Git deposunun oluşturulması,DevOps & Cloud,DevOps & Cloud;Git,10,23–29 Kasım 2026,P1,1,Done,main,"GitHub'da public depo açılır. README, .gitignore ve Kanban planı ilk commit ile main'e eklenir.","Depo public ve ilk commit main'de
 .gitignore .venv, .env ve yerel veritabanını dışarıda bırakıyor
 README'de proje tanımı ve 5 fonksiyon var",İlk commit: https://github.com/alimustafaekmen/etkinlik-kayit-sistemi/commit/edf84f9
@@ -11,12 +11,12 @@ Kapsam dışı maddeler yazıldı",PR #33: https://github.com/alimustafaekmen/et
 DEV-02,Mimari ve veri modeli,Software Development,Software Development;Design,10,23–29 Kasım 2026,P1,2,Done,docs/mimari,"Katmanlı yapı, API uç noktaları ve veri modeli (events, registrations) docs/architecture.md dosyasında tasarlanır.","Mimari şeması ve klasör yapısı açıklandı
 Tablolar ve alanları yazıldı
 API uç noktaları ve dönüş kodları listelendi",PR #34: https://github.com/alimustafaekmen/etkinlik-kayit-sistemi/pull/34
-DEV-03,Proje iskeleti,Software Development,Software Development;Development,10,23–29 Kasım 2026,P1,3,In Progress,feature/proje-iskeleti,"Flask uygulama yapısı, ayar dosyası, SQLite bağlantısı ve /health uç noktası oluşturulur.","flask run ile uygulama açılıyor ve /health 200 dönüyor
+DEV-03,Proje iskeleti,Software Development,Software Development;Development,10,23–29 Kasım 2026,P1,3,Done,feature/proje-iskeleti,"Flask uygulama yapısı, ayar dosyası, SQLite bağlantısı ve /health uç noktası oluşturulur.","flask run ile uygulama açılıyor ve /health 200 dönüyor
 Tablolar ilk açılışta otomatik oluşuyor
 Ayarlar ortam değişkenlerinden okunuyor",PR #35: https://github.com/alimustafaekmen/etkinlik-kayit-sistemi/pull/35
-DEV-04,F1: Etkinlik oluşturma,Software Development,Software Development;Development,10,23–29 Kasım 2026,P1,3,In Progress,feature/etkinlik-olusturma,"Ad, açıklama, konum, tarih ve kontenjan girilerek etkinlik oluşturulur (POST /api/events).","Geçerli veride 201 dönüyor
+DEV-04,F1: Etkinlik oluşturma,Software Development,Software Development;Development,10,23–29 Kasım 2026,P1,3,Done,feature/etkinlik-olusturma,"Ad, açıklama, konum, tarih ve kontenjan girilerek etkinlik oluşturulur (POST /api/events).","Geçerli veride 201 dönüyor
 Eksik veya hatalı alanda 400 ve Türkçe hata mesajı dönüyor
-Geçmiş tarihli etkinlik oluşturulamıyor",PR linki ve curl çıktısı (201 ve 400)
+Geçmiş tarihli etkinlik oluşturulamıyor",PR #39: https://github.com/alimustafaekmen/etkinlik-kayit-sistemi/pull/39
 DEV-05,F2: Etkinlik listeleme ve detay,Software Development,Software Development;Development,11,30 Kasım – 6 Aralık 2026,P1,3,Todo,feature/etkinlik-listeleme,Etkinlikler tarihe göre listelenir ve her etkinlikte kalan yer sayısı görünür. Ad veya konuma göre arama yapılabilir.,"GET /api/events tarihe göre sıralı liste dönüyor
 Her etkinlikte kayıt sayısı ve kalan yer var
 ?q= ile arama çalışıyor",PR linki ve GET /api/events çıktısı
