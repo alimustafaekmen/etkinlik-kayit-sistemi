@@ -22,6 +22,8 @@ Betik tekrar çalıştırılabilir (idempotent): aynı başlıklı issue varsa y
 panoda eksikse mevcut panoya eklenir.
 """
 
+from __future__ import annotations
+
 import argparse
 import csv
 import json
