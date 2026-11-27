@@ -1,13 +1,16 @@
 ## Ne değişti?
-<!-- 1-2 cümle -->
+<!-- 1-2 cümle: bu PR hangi görevi / fonksiyonu tamamlıyor? -->
 
 ## İlgili Kanban kartı
-Closes #<!-- issue numarası: PR birleşince kart otomatik olarak Done'a taşınır -->
+<!-- PR birleşince kart otomatik olarak Done'a geçer. Birden fazlaysa: Closes #4, Closes #5 -->
+Closes #
 
 ## Kontrol listesi
-- [ ] `pytest` yerelde geçti
-- [ ] `ruff check .` ve `ruff format --check .` temiz
-- [ ] CI pipeline yeşil
-- [ ] Gerekirse README / docs güncellendi
+- [ ] `make test` ve `make lint` yerelde geçti
+- [ ] CI (GitHub Actions) yeşil
+- [ ] Yeni davranış için test eklendi / güncellendi
+- [ ] Gerekirse README / `docs/` güncellendi
+- [ ] Karttaki Acceptance Criteria sağlandı
 
-## Kanıt (ekran görüntüsü, çıktı vb.)
+## Kanıt (Evidence)
+<!-- Ekran görüntüsü, curl / pytest çıktısı, CI run linki. Aynı link karttaki Evidence bölümüne de eklenir. -->

@@ -1,72 +1,64 @@
-# Kanban: kurulum ve haftalık rutin
+# Kanban
 
-Projenin Agile / Kanban takibiyle ilgili dosyalar bu klasörde.
+Proje **GitHub Projects** panosunda takip ediliyor. Kartlar GitHub Issue olduğu için commit ve Pull Request'ler
+karta bağlanıyor; PR açıklamasına `Closes #12` yazınca PR birleşince kart kendiliğinden Done'a geçiyor.
 
-| Dosya | İçerik |
+- **Pano:** https://github.com/users/alimustafaekmen/projects/1 (public, 5 hafta boyunca aynı URL)
+- **Kartlar:** [`tasks.md`](tasks.md) (okunabilir) ve [`tasks.csv`](tasks.csv) (asıl kaynak; pano betiği bunu okur).
+  32 kart, 5 hafta: Hafta 10 = 23–29 Kasım … Hafta 14 = 21–27 Aralık 2026.
+- **Haftalık görüntüler:** [`screenshots/`](screenshots/)
+
+## Pano
+
+| Sütun (Status) | Anlamı |
 |---|---|
-| `KANBAN_PLANI.md` | 5 haftalık plan ve 31 kartın tamamı (Description, Acceptance Criteria, Evidence) |
-| `kanban_gorevleri.csv` | Aynı kartların tablo hâli (Excel'de açılıyor, Trello/Jira'ya da aktarılabilir). Final teslimdeki "Kanban görev detayları CSV export" için temel |
-| `github_kanban_kur.py` | Kartları tek komutla GitHub Issues olarak açıp GitHub Projects panosuna ekleyen betik |
-| `haftalik-snapshotlar/` | Her hafta sonu alınan pano ekran görüntüleri |
+| Todo | Planlandı, başlanmadı |
+| In Progress | Üzerinde çalışılıyor (aynı anda en fazla 2–3 kart) |
+| Issues / Blocked | Takıldım veya hata var; nedeni karta yorum olarak yazılır |
+| Done | Kabul kriterleri sağlandı, Evidence gerçek linklerle dolu |
 
-## 1. Panoyu kurma (bir kez, yaklaşık 10 dk)
+Alanlar: `Hafta` (Hafta 10–14), `Alan` (Software Development · DevOps & Cloud · Agile & Sunum), `Öncelik` (P1 · P2),
+`Tahmin (saat)`. Her hafta bir milestone (`Hafta N`, bitişi pazar).
 
-Araç olarak GitHub Projects kullanılıyor. Kartlar Issue olduğu için commit ve Pull Request'ler doğrudan karta
-bağlanıyor; PR açıklamasına `Closes #12` yazılınca PR birleştiğinde kart otomatik olarak Done'a geçiyor. Ödevdeki
-Evidence şartının büyük kısmı bu şekilde karşılanıyor.
+**Kart biçimi:** başlık `[ID] Görev adı`; gövdede `Task Description` (1–2 cümle), `Acceptance Criteria`
+(2–3 maddelik kontrol listesi) ve `Evidence` (commit, PR, Actions run, canlı URL, ekran görüntüsü).
 
-1. GitHub'da depoyu oluştur ve başlangıç dosyalarını push et (bkz. `docs/git-workflow.md`).
-2. `gh` CLI ile proje oluşturma yetkisini ver ve kurulum betiğini çalıştır:
-   ```bash
-   brew install gh            # macOS; yoksa https://cli.github.com
-   gh auth login
-   gh auth refresh -s project # GitHub Projects panosu oluşturma ve kart ekleme yetkisi
-   python3 kanban/github_kanban_kur.py --repo alimustafaekmen/etkinlik-kayit-sistemi --dry-run
-   python3 kanban/github_kanban_kur.py --repo alimustafaekmen/etkinlik-kayit-sistemi --create-project
-   ```
-   Betik etiketleri (19), milestone'ları (`Hafta 1`–`Hafta 5`) ve 31 Issue'yu oluşturur; ardından public bir GitHub
-   Projects panosu açar, depoya bağlar ve mevcut/yeni tüm Issue'ları tekrar etmeden panoya ekler.
-   Var olan bir panoya eklemek için `--create-project` yerine `--project <numara>` kullanılabilir.
-3. Pano açıldıktan sonra GitHub Projects > View > Board görünümünde Status alanına `Issues / Blocked` sütununu
-   ekle (`Todo · In Progress · Issues / Blocked · Done`).
-4. Proje > `⋯` > Workflows: "Item closed → Done" ve "Pull request merged → Done" otomasyonlarını kontrol et.
-5. Haftalık görünüm için Board görünümünde Group by: `Milestone` veya `milestone:"Hafta 1"` filtresini kullan.
-6. Proje URL'sini OnlineBeykoz'a bildir. 5 hafta boyunca aynı URL kullanılmalı.
+## Kurulum (bir kez)
 
-Trello ile yapılacak olursa listeler To Do / In Progress / Issues / Done olur; her kartta `KANBAN_PLANI.md`'deki
-Description açıklamaya, Acceptance Criteria Checklist'e, kanıtlar Attachment/Link olarak eklenir.
-
-## 2. Kart yaşam döngüsü
-
-```
-To Do ──(çalışmaya başla, branch aç)──> In Progress ──(PR birleşti + kriterler sağlandı)──> Done
-                                            │
-                                            └──(hata/engel)──> Issues / Blocked ──(çözüldü)──┘
+```bash
+gh auth login && gh auth refresh -s project              # 'project' yetkisi pano için gerekli
+python3 scripts/setup_kanban.py --dry-run --create-project   # önce planı gör (GitHub'a yazmaz)
+python3 scripts/setup_kanban.py --create-project             # etiketler, milestone'lar, 32 issue, pano
 ```
 
-Bir kart Done'a taşınmadan önce:
-- [ ] Acceptance Criteria kutularının hepsi işaretli
-- [ ] Evidence bölümüne gerçek link eklendi (commit, PR, Actions run, Render URL, ekran görüntüsü)
+Betik tekrar çalıştırılabilir; var olanları yeniden oluşturmaz ve elle taşınan kartların Status'unu değiştirmez.
+Sonra GitHub'da: Board görünümü (Column by: Status) ve pano `⋯ > Workflows` içinde "Item closed" ile
+"Pull request merged" → Done açık olmalı.
 
-## 3. Haftalık rutin (her hafta sonu yaklaşık 10 dk)
+## Kart yaşam döngüsü
 
-1. Kartların durumunu güncelle; yeni çıkan işler için kart aç (ör. bulunan bir hata için `Bug` etiketli kart).
-2. Panonun tamamını gösteren ekran görüntüsü al (macOS: `Cmd + Shift + 4`, ardından boşluk tuşu ile pencere seçimi).
-3. Önce yerel arşive `haftalik-snapshotlar/hafta-0N_YYYY-AA-GG.png` adıyla kaydet, ardından OnlineBeykoz teslim
-   kuralına göre kopyala:
-   - Güncel görüntü: `Kanban_Week_0N.png` (ör. `Kanban_Week_01.png`)
-   - Kümülatif geçmiş ZIP: `Kanban_History_Week_01-0N.zip` (ör. `Kanban_History_Week_01-01.zip`)
-4. Geçmiş ZIP'ini oluştur:
-   ```bash
-   cd kanban && zip -r ../teslim/Kanban_History_Week_01-0N.zip haftalik-snapshotlar -x "*.md"
-   ```
-5. OnlineBeykoz'a güncel `Kanban_Week_0N.png`, `Kanban_History_Week_01-0N.zip` ve pano URL'sini yükle.
-6. Haftalık 3-5 dk sunum notlarını `docs/haftalik-sunum-notlari.md`'den hazırla.
+```
+Todo ──(branch aç)──> In Progress ──(PR birleşti, kriterler tamam)──> Done
+                          └──(hata / engel)──> Issues / Blocked ──(çözüldü)──┘
+```
 
-Ekran görüntüleri o haftanın gerçek durumunu göstermeli; hoca ilerlemeyi bu geçmişe bakarak değerlendiriyor.
+1. Kartı In Progress'e al, karttaki branch'i aç (`git switch -c feature/...`).
+2. PR aç, açıklamaya `Closes #<issue>` yaz. Takılırsan kartı Issues / Blocked'a al.
+3. PR birleşince kart Done olur; Acceptance Criteria kutularını işaretle, Evidence'a gerçek linkleri yaz.
+4. Plan dışı iş (ör. hata) için "Görev kartı (Kanban)" şablonuyla yeni issue aç (`Bug` etiketi, `Hafta N`).
 
-## 4. Final teslim için Kanban export
+## Haftalık rutin (her pazar)
 
-GitHub Projects > Table görünümü > `⋯` > Export view data (CSV) ile kartlar dışa aktarılabilir. Diğer seçenek, bu
-klasördeki `kanban_gorevleri.csv` dosyasının `status` ve `evidence` sütunlarını gerçek değerlerle güncelleyip
-teslim etmek.
+1. Kart durumlarını ve Evidence linklerini güncelle.
+2. Board görünümünün ekran görüntüsünü al (dört sütun görünmeli) ve
+   `kanban/screenshots/Kanban_Week_NN.png` olarak kaydet.
+3. `make kanban-snapshot WEEK=NN` → `submission/dist/` altında `Kanban_Week_NN.png` ve
+   `Kanban_History_Week_10-NN.zip` oluşur.
+4. Bu iki dosyayı ve pano URL'sini OnlineBeykoz'a yükle; görüntüyü commit'le (`docs: Hafta N Kanban görüntüsü`).
+
+## Final export
+
+- `tasks.csv` ve `tasks.md` içindeki `status` ve `evidence` değerlerini gerçek linklerle güncelle;
+  `make package` `tasks.csv`'yi ve 5 haftalık görüntüyü `Project_Evidence.zip` içindeki `01_Kanban/` klasörüne koyar.
+- Panodan da CSV al: Table görünümü > görünüm menüsü > *Export view data*; dosyayı
+  `submission/Project_Evidence/01_Kanban/` içine koy (issue gövdesi bu export'ta olmadığı için `tasks.csv` de teslim edilir).
